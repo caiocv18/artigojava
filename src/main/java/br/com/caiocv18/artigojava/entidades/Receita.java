@@ -1,5 +1,7 @@
 package br.com.caiocv18.artigojava.entidades;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -21,10 +23,12 @@ public class Receita implements Serializable {
     private Long id;
     private String titulo;
     private Double valor;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT-3")
     private Instant data;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private Usuario usuario;
 
     public Receita() {
