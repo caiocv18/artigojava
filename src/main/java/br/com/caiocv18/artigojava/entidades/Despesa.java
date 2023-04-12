@@ -1,5 +1,6 @@
 package br.com.caiocv18.artigojava.entidades;
 
+import br.com.caiocv18.artigojava.enums.DespesaStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -26,6 +27,8 @@ public class Despesa implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT-3")
     private Instant data;
 
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
@@ -34,11 +37,12 @@ public class Despesa implements Serializable {
     public Despesa() {
     }
 
-    public Despesa(String titulo, Double valor, Instant data, Usuario usuario) {
+    public Despesa(String titulo, Double valor, Instant data, DespesaStatus status, Usuario usuario) {
         super();
         this.titulo = titulo;
         this.valor = valor;
         this.data = data;
+        setStatus(status);
         this.usuario = usuario;
     }
 
@@ -72,6 +76,16 @@ public class Despesa implements Serializable {
 
     public void setData(Instant data) {
         this.data = data;
+    }
+
+    public DespesaStatus getStatus() {
+        return DespesaStatus.valorDoCodigo(status);
+    }
+
+    public void setStatus(DespesaStatus status) {
+        if(status != null){
+            this.status = status.getCodigo();
+        }
     }
 
     public Usuario getUsuario() {

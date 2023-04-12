@@ -1,5 +1,6 @@
 package br.com.caiocv18.artigojava.entidades;
 
+import br.com.caiocv18.artigojava.enums.ReceitaStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -31,14 +32,17 @@ public class Receita implements Serializable {
     @JsonIgnore
     private Usuario usuario;
 
+    private Integer status;
+
     public Receita() {
     }
 
-    public Receita(String titulo, Double valor, Instant data, Usuario usuario) {
+    public Receita(String titulo, Double valor, Instant data, ReceitaStatus status, Usuario usuario) {
         super();
         this.titulo = titulo;
         this.valor = valor;
         this.data = data;
+        setStatus(status);
         this.usuario = usuario;
     }
 
@@ -72,6 +76,16 @@ public class Receita implements Serializable {
 
     public void setData(Instant data) {
         this.data = data;
+    }
+
+    public ReceitaStatus getStatus() {
+        return ReceitaStatus.valorDoCodigo(status);
+    }
+
+    public void setStatus(ReceitaStatus status) {
+        if(status != null){
+            this.status = status.getCodigo();
+        }
     }
 
     public Usuario getUsuario() {
