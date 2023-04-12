@@ -1,10 +1,12 @@
 package br.com.caiocv18.artigojava.configuracao;
 
+import br.com.caiocv18.artigojava.entidades.Categoria;
 import br.com.caiocv18.artigojava.entidades.Despesa;
 import br.com.caiocv18.artigojava.entidades.Receita;
 import br.com.caiocv18.artigojava.entidades.Usuario;
 import br.com.caiocv18.artigojava.enums.DespesaStatus;
 import br.com.caiocv18.artigojava.enums.ReceitaStatus;
+import br.com.caiocv18.artigojava.repositorios.CategoriaRepositorio;
 import br.com.caiocv18.artigojava.repositorios.DespesaRepositorio;
 import br.com.caiocv18.artigojava.repositorios.ReceitaRepositorio;
 import br.com.caiocv18.artigojava.repositorios.UsuarioRepositorio;
@@ -26,6 +28,8 @@ public class TesteConfiguracao implements CommandLineRunner {
     private ReceitaRepositorio receitaRepositorio;
     @Autowired
     private DespesaRepositorio despesaRepositorio;
+    @Autowired
+    private CategoriaRepositorio categoriaRepositorio;
 
     @Override
     public void run(String... args) throws Exception {
@@ -40,9 +44,14 @@ public class TesteConfiguracao implements CommandLineRunner {
         Despesa despesa2 = new Despesa("Conta de luz", 150.00, Instant.now(), DespesaStatus.ATRASADA, usuario2);
         Despesa despesa3 = new Despesa("Almoço", 25.00, Instant.now(), DespesaStatus.PAGA, usuario1);
 
+        Categoria categoria1 = new Categoria("Combustível");
+        Categoria categoria2 = new Categoria("Alimentação");
+        Categoria categoria3 = new Categoria("Trabalho");
+
         usuarioRepositorio.saveAll(Arrays.asList(usuario1, usuario2));
         receitaRepositorio.saveAll(Arrays.asList(receita1, receita2, receita3));
         despesaRepositorio.saveAll(Arrays.asList(despesa1, despesa2, despesa3));
+        categoriaRepositorio.saveAll(Arrays.asList(categoria1, categoria2, categoria3));
 
     }
 }
