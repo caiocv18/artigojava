@@ -45,9 +45,9 @@ public class TesteConfiguracao implements CommandLineRunner {
 
         categoriaRepositorio.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4));
 
-        Receita receita1 = new Receita("Salário", 2900.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario1);
-        Receita receita2 = new Receita("Salário", 4000.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario2);
-        Receita receita3 = new Receita("Bônus", 500.00, Instant.now(), ReceitaStatus.AGENDADA, usuario1);
+        Receita receita1 = new Receita("Salário", 2900.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario1, categoria3);
+        Receita receita2 = new Receita("Salário", 4000.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario2, categoria3);
+        Receita receita3 = new Receita("Bônus", 500.00, Instant.now(), ReceitaStatus.AGENDADA, usuario1, categoria3);
 
         Despesa despesa1 = new Despesa("Gasolina", 50.00, Instant.now(), DespesaStatus.PAGA, usuario1, categoria1);
         Despesa despesa2 = new Despesa("Conta de luz", 150.00, Instant.now(), DespesaStatus.ATRASADA, usuario2, categoria4);

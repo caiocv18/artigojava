@@ -1,5 +1,6 @@
 package br.com.caiocv18.artigojava.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -20,6 +21,13 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+
+    @OneToMany(mappedBy = "categoriaReceita")
+    @JsonIgnore
+    private List<Receita> receitas = new ArrayList<>();
+    @OneToMany(mappedBy = "categoriaDespesa")
+    @JsonIgnore
+    private List<Despesa> despesas = new ArrayList<>();
 
     public Categoria() {
     }
@@ -44,10 +52,13 @@ public class Categoria implements Serializable {
         this.titulo = titulo;
     }
 
-//    @OneToMany(mappedBy = "usuario")
-//    private List<Receita> receitas = new ArrayList<>();
-    @OneToMany(mappedBy = "categoria")
-    private List<Despesa> despesas = new ArrayList<>();
+    public List<Receita> getReceitas() {
+        return receitas;
+    }
+
+    public List<Despesa> getDespesas() {
+        return despesas;
+    }
 
     @Override
     public boolean equals(Object o) {

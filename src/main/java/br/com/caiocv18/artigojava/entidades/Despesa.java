@@ -35,20 +35,20 @@ public class Despesa implements Serializable {
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @JoinColumn(name = "categoria_despesa_id")
+    private Categoria categoriaDespesa;
 
     public Despesa() {
     }
 
-    public Despesa(String titulo, Double valor, Instant data, DespesaStatus status, Usuario usuario, Categoria categoria) {
+    public Despesa(String titulo, Double valor, Instant data, DespesaStatus status, Usuario usuario, Categoria categoriaDespesa) {
         super();
         this.titulo = titulo;
         this.valor = valor;
         this.data = data;
         setStatus(status);
         this.usuario = usuario;
-        this.categoria = categoria;
+        this.categoriaDespesa = categoriaDespesa;
     }
 
     public Long getId() {
@@ -101,12 +101,12 @@ public class Despesa implements Serializable {
         this.usuario = usuario;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Categoria getCategoriaDespesa() {
+        return categoriaDespesa;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoriaDespesa(Categoria categoriaDespesa) {
+        this.categoriaDespesa = categoriaDespesa;
     }
 
     @Override

@@ -26,24 +26,28 @@ public class Receita implements Serializable {
     private Double valor;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT-3")
     private Instant data;
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
     private Usuario usuario;
 
-    private Integer status;
+    @ManyToOne
+    @JoinColumn(name = "categoria_receita_id")
+    private Categoria categoriaReceita;
 
     public Receita() {
     }
 
-    public Receita(String titulo, Double valor, Instant data, ReceitaStatus status, Usuario usuario) {
+    public Receita(String titulo, Double valor, Instant data, ReceitaStatus status, Usuario usuario, Categoria categoriaReceita) {
         super();
         this.titulo = titulo;
         this.valor = valor;
         this.data = data;
         setStatus(status);
         this.usuario = usuario;
+        this.categoriaReceita = categoriaReceita;
     }
 
     public Long getId() {
@@ -94,6 +98,14 @@ public class Receita implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Categoria getCategoriaReceita() {
+        return categoriaReceita;
+    }
+
+    public void setCategoriaReceita(Categoria categoriaReceita) {
+        this.categoriaReceita = categoriaReceita;
     }
 
     @Override
