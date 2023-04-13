@@ -34,16 +34,21 @@ public class Despesa implements Serializable {
     @JsonIgnore
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     public Despesa() {
     }
 
-    public Despesa(String titulo, Double valor, Instant data, DespesaStatus status, Usuario usuario) {
+    public Despesa(String titulo, Double valor, Instant data, DespesaStatus status, Usuario usuario, Categoria categoria) {
         super();
         this.titulo = titulo;
         this.valor = valor;
         this.data = data;
         setStatus(status);
         this.usuario = usuario;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -94,6 +99,14 @@ public class Despesa implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override

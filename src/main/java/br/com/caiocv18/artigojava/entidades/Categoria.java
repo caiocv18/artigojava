@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -41,6 +43,11 @@ public class Categoria implements Serializable {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+//    @OneToMany(mappedBy = "usuario")
+//    private List<Receita> receitas = new ArrayList<>();
+    @OneToMany(mappedBy = "categoria")
+    private List<Despesa> despesas = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

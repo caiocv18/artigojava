@@ -36,22 +36,27 @@ public class TesteConfiguracao implements CommandLineRunner {
         Usuario usuario1 = new Usuario("Caio", "caio@gmail.com", "123456");
         Usuario usuario2 = new Usuario("Vinicius", "vinicius@gmail.com", "123456");
 
-        Receita receita1 = new Receita("Salário", 2900.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario1);
-        Receita receita2 = new Receita("Salário", 4000.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario2);
-        Receita receita3 = new Receita("Bônus", 500.00, Instant.now(), ReceitaStatus.AGENDADA, usuario1);
-
-        Despesa despesa1 = new Despesa("Gasolina", 50.00, Instant.now(), DespesaStatus.PAGA, usuario1);
-        Despesa despesa2 = new Despesa("Conta de luz", 150.00, Instant.now(), DespesaStatus.ATRASADA, usuario2);
-        Despesa despesa3 = new Despesa("Almoço", 25.00, Instant.now(), DespesaStatus.PAGA, usuario1);
+        usuarioRepositorio.saveAll(Arrays.asList(usuario1, usuario2));
 
         Categoria categoria1 = new Categoria("Combustível");
         Categoria categoria2 = new Categoria("Alimentação");
         Categoria categoria3 = new Categoria("Trabalho");
+        Categoria categoria4 = new Categoria("Contas mensais");
 
-        usuarioRepositorio.saveAll(Arrays.asList(usuario1, usuario2));
+        categoriaRepositorio.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4));
+
+        Receita receita1 = new Receita("Salário", 2900.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario1);
+        Receita receita2 = new Receita("Salário", 4000.00, Instant.now(), ReceitaStatus.RECEBIDA, usuario2);
+        Receita receita3 = new Receita("Bônus", 500.00, Instant.now(), ReceitaStatus.AGENDADA, usuario1);
+
+        Despesa despesa1 = new Despesa("Gasolina", 50.00, Instant.now(), DespesaStatus.PAGA, usuario1, categoria1);
+        Despesa despesa2 = new Despesa("Conta de luz", 150.00, Instant.now(), DespesaStatus.ATRASADA, usuario2, categoria4);
+        Despesa despesa3 = new Despesa("Almoço", 25.00, Instant.now(), DespesaStatus.PAGA, usuario1, categoria2);
+
+
         receitaRepositorio.saveAll(Arrays.asList(receita1, receita2, receita3));
         despesaRepositorio.saveAll(Arrays.asList(despesa1, despesa2, despesa3));
-        categoriaRepositorio.saveAll(Arrays.asList(categoria1, categoria2, categoria3));
+
 
     }
 }

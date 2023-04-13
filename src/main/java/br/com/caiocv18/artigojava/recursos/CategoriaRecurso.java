@@ -2,7 +2,6 @@ package br.com.caiocv18.artigojava.recursos;
 
 import br.com.caiocv18.artigojava.entidades.Categoria;
 import br.com.caiocv18.artigojava.servicos.CategoriaServico;
-import br.com.caiocv18.artigojava.servicos.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
