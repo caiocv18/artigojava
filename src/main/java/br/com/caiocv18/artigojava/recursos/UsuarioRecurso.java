@@ -44,4 +44,10 @@ public class UsuarioRecurso {
         servico.remover(id); //Remove no banco de dados invocando o método criado dentro de UsuarioServico
         return ResponseEntity.noContent().build(); //Responde a requisição de deleção de usuário de forma a não ter conteúdo
     }
+
+    @PutMapping(value = "/{id}") //Informa que se trata de uma requisição que utiliza o método PUT e que será passado o parâmetro ID
+    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado){
+        usuarioAtualizado = servico.atualizar(id, usuarioAtualizado); //Atualiza no banco de dados invocando o método criado dentro de UsuarioServico
+        return ResponseEntity.ok().body(usuarioAtualizado); //Responde a requisição informando os dados atualizados do usuário no corpo da resposta
+    }
 }
