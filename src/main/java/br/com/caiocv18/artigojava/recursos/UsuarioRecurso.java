@@ -38,4 +38,10 @@ public class UsuarioRecurso {
                 toUri(); //Converte o resultado das operações anteriores para o formato de URI
         return ResponseEntity.created(uri).body(novoUsuario);
     }
+
+    @DeleteMapping(value = "/{id}") //Informa que se trata de uma requisição que utiliza o método DELETE e que será passado o parâmetro ID
+    public ResponseEntity<Void> remover(@PathVariable Long id){ //Void informa que será uma requisição sem nenhum retorno na resposta e @PathVariable é utilizado para recuperar o ID que foi passado pelo Path da requisição
+        servico.remover(id); //Remove no banco de dados invocando o método criado dentro de UsuarioServico
+        return ResponseEntity.noContent().build(); //Responde a requisição de deleção de usuário de forma a não ter conteúdo
+    }
 }
